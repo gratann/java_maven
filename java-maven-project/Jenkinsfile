@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.9.9' // Same name as configured in Jenkins
+        maven 'Maven 3.9.9' 
     }
 
     triggers {
-        pollSCM('* * * * *')  // Polls Git repo every minute 
+        pollSCM('* * * * *')  // Polls Git every minute for changes
     }
 
     stages {
@@ -20,14 +20,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo "🔧 Building the project..."
-                bat "mvn clean install"
+                bat "cd java-maven-project && mvn clean install"
             }
         }
 
         stage('Test') {
             steps {
                 echo "🧪 Running tests..."
-                bat "mvn test"
+                bat "cd java-maven-project && mvn test"
             }
         }
     }
